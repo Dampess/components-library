@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  app: {baseURL:process.env.CI ? '/components/' : '/'},
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -8,4 +9,5 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/main.css"],
+
 });
