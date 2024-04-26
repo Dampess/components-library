@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <div class="mr-4">
-      <span class="text-xl font-semibold mr-2">{{ formatTime }}</span>
+      <span class="text-xl font-semibold mr-2 timer">{{ formatTime }}</span>
     </div>
     <div>
       <button @click="startTimer" :disabled="timerActive" class="px-4 py-2 bg-blue-500 text-white rounded-md mr-2">Start</button>
@@ -51,3 +51,10 @@ export default {
   }
 };
 </script>
+<style>
+.timer {
+  font-family: "Digital-7"; /* Remplacez "Digital-7" par le nom de votre police numérique */
+  font-size: 36px; /* Ajustez la taille de la police selon vos besoins */
+  color: #333; /* Couleur du texte */
+}
+</style>

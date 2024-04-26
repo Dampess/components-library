@@ -31,7 +31,7 @@
     </div>
     <div class="mt-8">
       <h2 class="text-xl font-semibold mb-4">Star Rating Demo</h2>
-      <StarRating @ratingSelected="handleRatingSelected" />
+      <StarRating @rating-selected="handleRatingSelected" />
     </div>
     <div class="mt-8">
       <h2 class="text-xl font-semibold mb-4">Table Demo</h2>
@@ -53,10 +53,10 @@
       <h2 class="text-xl font-semibold mb-4">ToDoList</h2>
       <ToDoList />
     </div>
-    <!-- <div class="mt-8">
+    <div class="mt-8">
       <h2 class="text-xl font-semibold mb-4">Reactions</h2>
       <LikeDislike :custom-icons="customIcons"/>
-    </div> -->
+    </div>
     <div class="mt-8 mb-8">
       <h2 class="text-xl font-semibold mb-4">Contacts Directory</h2>
       <Contacts/>
