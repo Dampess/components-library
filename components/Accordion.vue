@@ -2,11 +2,14 @@
   <div class="accordion">
     <div v-for="(item, index) in items" :key="index" class="accordion-item">
       <div
-        class="accordion-title"
+        class="accordion-title flex items-center justify-between"
         :class="{ active: isOpen(index) }"
         @click="toggle(index)"
       >
-        {{ item.title }}
+        <span>{{ item.title }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 transition-transform duration-300 transform" :class="{ 'rotate-180': isOpen(index) }">
+          <path fill="currentColor" d="M7 10l5 5 5-5z" />
+        </svg>
       </div>
       <div v-if="isOpen(index)" class="accordion-content">
         {{ item.content }}
@@ -72,7 +75,7 @@ export default {
   padding: 1rem;
   background-color: #f0f0f0;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 4px 4px 0 0;
 }
 
 .accordion-title.active {
@@ -85,5 +88,9 @@ export default {
   border: 1px solid #ccc;
   border-top: none;
   border-radius: 0 0 4px 4px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
 }
 </style>

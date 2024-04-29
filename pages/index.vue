@@ -1,65 +1,79 @@
 <template>
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-4 bg-gray-300">
     <h1 class="text-3xl font-semibold mb-8 text-center">Components library</h1>
-    <h2 class="text-xl font-semibold mb-4">Image Editor</h2>
+    <h2 class="text-2xl font-semibold mb-4">Image Editor</h2>
     <ImageEditor @avatarSaved="handleImageCropped" :message="avatarMessage" />
     <div v-if="croppedImageUrl" class="mt-8">
       <h2 class="text-xl font-semibold mb-4">Cropped Image</h2>
       <img :src="croppedImageUrl" alt="Cropped Image" class="max-w-lg" />
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Scramble Text Demo</h2>
-      <scranmble-text
-        :texts="['Hello', 'Bonjour', 'Hola', 'Ciao']"
-        :interval="2000"
-        class="text-center text-4xl text-black bg-red-600"
-      />
+    <div class="mt-8 border-black border-2 rounded p-2 bg-gray-100">
+      <h2 class="text-2xl font-semibold mb-4">Scramble Text Demo</h2>
+      <div class="flex flex-col items-center">
+        <scranmble-text
+          :texts="['Hello', 'Bonjour', 'Hola', 'Ciao']"
+          :interval="2000"
+          class="text-center mx-auto text-4xl text-black bg-red-600"
+        />
+      </div>
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Progress Bar Demo</h2>
-      <ProgressBarre :progress="progress" color="blue-500" height="h-6" />
-      <button
-        @click="startProgress()"
-        class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-      >
-        Début
-      </button>
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Progress Bar Demo</h2>
+      <div class="flex flex-col items-center">
+        <ProgressBarre :progress="progress" color="blue-500" height="h-6" />
+        <button
+          @click="startProgress()"
+          class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Début
+        </button>
+      </div>
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Chronometer Timer Demo</h2>
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Chronometer Timer Demo</h2>
       <Timer />
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Star Rating Demo</h2>
-      <StarRating @rating-selected="handleRatingSelected" />
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">CountDown Demo</h2>
+      <CountDown />
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Table Demo</h2>
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Star Rating Demo</h2>
+      <div class="flex flex-col items-center">
+        <StarRating @rating-selected="handleRatingSelected" />
+      </div>
+    </div>
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Table Demo</h2>
       <Table :data="tableData" :columns="tableColumns" />
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Foire aux questions</h2>
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Foire aux questions</h2>
       <Accordion :items="faqItems" />
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Générateur de Mots de Passe</h2>
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Générateur de Mots de Passe</h2>
       <PasswordGenerator />
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Horloge Analogique Interactive</h2>
-      <Clock />
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Horloge Analogique Interactive</h2>
+      <div class="flex flex-col items-center">
+        <Clock />
+      </div>
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">ToDoList</h2>
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">ToDoList</h2>
       <ToDoList />
     </div>
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Reactions</h2>
-      <LikeDislike :custom-icons="customIcons"/>
+    <div class="mt-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Reactions</h2>
+      <div class="flex flex-col items-center">
+        <LikeDislike :custom-icons="customIcons" />
+      </div>
     </div>
-    <div class="mt-8 mb-8">
-      <h2 class="text-xl font-semibold mb-4">Contacts Directory</h2>
-      <Contacts/>
+    <div class="mt-8 mb-8 border-black border-2 bg-gray-100 rounded p-2">
+      <h2 class="text-2xl font-semibold mb-4">Contacts Directory</h2>
+      <Contacts />
     </div>
   </div>
 </template>
@@ -99,10 +113,10 @@ export default {
         // Ajoutez autant de questions et réponses que nécessaire
       ],
       customIcons: [
-        { url: 'happy.png', label: 'Happy' },
-        { url: 'sad.png', label: 'Sad' },
-        { url: 'angry.png', label: 'Angry' }
-      ]
+        { url: "happy.png", label: "Happy" },
+        { url: "sad.png", label: "Sad" },
+        { url: "angry.png", label: "Angry" },
+      ],
     };
   },
 

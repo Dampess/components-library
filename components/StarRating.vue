@@ -16,7 +16,6 @@
           <path
             d="M12 2L9.45 8.09 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24l-7.45-1.15z"
           
-            
           />
         </svg>
       </span>
@@ -39,14 +38,6 @@ export default {
       type: Number,
       default: 2, // Note initiale
     },
-    //activeColor: {
-    //  type: String,
-    // default: "#ffcc00" // Couleur des étoiles sélectionnées
-    // },
-    //inactiveColor: {
-    // type: String,
-    //default: "#ccc", // Couleur des étoiles non sélectionnées
-    // },
   },
   data() {
     return {
@@ -91,7 +82,7 @@ export default {
   fill: #ffcc00;
 }
 .inactiveColor {
-  fill: #ccc;
+  fill: #b5b5b5;
 }
 .star-rating {
   font-size: 24px; /* Taille des étoiles */

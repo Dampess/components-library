@@ -1,6 +1,6 @@
 <template>
-  <div class="relative inline-block text-black bg-red-600 text-center text-4xl">
-    <span :class="{ 'scrolling': isScrolling }">{{ currentText }}</span>
+  <div class="relative rounded p-2 inline-block text-black bg-gray-600 text-center text-4xl">
+    <span :class="{ 'scrolling': isScrolling }">{{ displayText }}</span>
   </div>
 </template>
 
@@ -20,12 +20,16 @@ export default {
     return {
       textIndex: 0,
       timer: null,
-      isScrolling: false
+      isScrolling: false,
+      transitionText: '',
+      transitionTimeout: null,
+      letterIndex: 0,
+      specialChars: ['!', '@', '#', '$', '%', '^', '&', '*']
     };
   },
   computed: {
-    currentText() {
-      return this.texts[this.textIndex];
+    displayText() {
+      return this.transitionText || this.texts[this.textIndex];
     }
   },
   mounted() {
@@ -36,27 +40,43 @@ export default {
   },
   methods: {
     changeText() {
+      const nextText = this.texts[(this.textIndex + 1) % this.texts.length];
+      this.transitionText = '';
       this.isScrolling = true;
-      this.textIndex = (this.textIndex + 1) % this.texts.length;
-      setTimeout(() => {
-        this.isScrolling = false;
-      }, 1000); // Reset isScrolling after 1 second
+      this.letterIndex = 0;
+      this.transitionTimeout = setInterval(() => {
+        if (this.letterIndex < nextText.length) {
+          // Alterne entre les caractères spéciaux et les lettres originales
+          if (this.letterIndex % 2 === 0) {
+            this.transitionText += nextText.charAt(this.letterIndex);
+          } else {
+            this.transitionText += this.specialChars[Math.floor(Math.random() * this.specialChars.length)];
+          }
+          this.letterIndex++;
+        } else {
+          clearInterval(this.transitionTimeout);
+          this.textIndex = (this.textIndex + 1) % this.texts.length;
+          setTimeout(() => {
+            this.isScrolling = false;
+          }, 5000); // Augmente le délai de réinitialisation de l'animation
+        }
+      }, 100); // Ralentit la vitesse de changement de lettre
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .scrolling {
-  animation: scrollAnimation 1s linear;
+  animation: scrollDown 1s linear;
 }
 
-@keyframes scrollAnimation {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
+@keyframes scrollDown {
+  from {
     transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
   }
 }
 </style>

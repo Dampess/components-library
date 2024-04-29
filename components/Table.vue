@@ -1,23 +1,25 @@
 <template>
   <table class="table">
-    <thead>
+    <thead class="bg-gray-700">
       <tr>
-        <th v-for="(column, index) in columns" :key="index" @click="sortTable(column.key)">
-          {{ column.label }}
-          <span v-if="sortColumn === column.key">
-            <svg v-if="sortOrder === 'asc'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 inline">
-              <path d="M7 14l5-5 5 5z" />
-            </svg>
-            <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 inline">
-              <path d="M7 10l5 5 5-5z" />
-            </svg>
-          </span>
+        <th v-for="(column, index) in columns" :key="index" @click="sortTable(column.key)" class="px-4 py-2 cursor-pointer">
+          <div class="flex items-center">
+            {{ column.label }}
+            <span>
+              <svg v-if="sortOrder === 'asc'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 inline">
+                <path d="M7 14l5-5 5 5z" />
+              </svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 inline">
+                <path d="M7 10l5 5 5-5z" />
+              </svg>
+            </span>
+          </div>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(row, rowIndex) in sortedRows" :key="rowIndex">
-        <td v-for="(column, colIndex) in columns" :key="colIndex">{{ row[column.key] }}</td>
+      <tr v-for="(row, rowIndex) in sortedRows" :key="rowIndex" :class="rowIndex % 2 === 0 ? 'bg-gray-100' : ''">
+        <td v-for="(column, colIndex) in columns" :key="colIndex" class="px-4 py-2">{{ row[column.key] }}</td>
       </tr>
     </tbody>
   </table>
@@ -84,7 +86,7 @@ export default {
 
 .table th,
 .table td {
-  border: 1px solid #ccc;
+  border: 1px solid #908f8f;
   padding: 8px;
 }
 

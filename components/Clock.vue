@@ -1,16 +1,34 @@
 <template>
   <div class="clock">
-    <div v-if="clockStyle === 'modern'" class="digital-clock">
+    <div
+      v-if="clockStyle === 'modern'"
+      class="digital-clock text-4xl text-red-600"
+    >
       {{ currentTime.toLocaleTimeString() }}
+      {{ currentTime.toLocaleDateString() }}
     </div>
     <svg v-else :viewBox="viewBox" class="clock-face">
-      <circle class="clock-circle" cx="50%" cy="50%" :r="radius" />
+      <defs>
+        <filter id="drop-shadow">
+          <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#8d5e4c" />
+        </filter>
+      </defs>
+      <circle
+        class="clock-circle"
+        cx="50%"
+        cy="50%"
+        :r="radius"
+        fill="#fff"
+        stroke="#e8a87c"
+        stroke-width="14"
+      />
       <g v-for="(number, index) in 12" :key="index">
         <text
           :x="getTextX(index)"
           :y="getTextY(index)"
           :font-size="getFontSize()"
           :text-anchor="getTextAnchor(index)"
+          class="text-lg text-orange-500"
         >
           {{ number }}
         </text>
@@ -21,6 +39,9 @@
         :y1="centerY"
         :x2="hourX"
         :y2="hourY"
+        stroke="#4b2d21"
+        stroke-width="8"
+        filter="url(#drop-shadow)"
       />
       <line
         class="minute-hand"
@@ -28,6 +49,9 @@
         :y1="centerY"
         :x2="minuteX"
         :y2="minuteY"
+        stroke="#ac6e56"
+        stroke-width="7"
+        filter="url(#drop-shadow)"
       />
       <line
         class="second-hand"
@@ -35,9 +59,14 @@
         :y1="centerY"
         :x2="secondX"
         :y2="secondY"
+        stroke="#f00"
+        stroke-width="3"
+        filter="url(#drop-shadow)"
       />
-      <circle class="center-circle" cx="50%" cy="50%" r="3" />
+
+      <circle class="center-circle" cx="50%" cy="50%" r="5" fill="#000" />
     </svg>
+    <p>{{ currentTime.toLocaleDateString() }}</p>
     <div class="options mt-4">
       <label for="timezone" class="mr-2">Fuseau horaire :</label>
       <select
@@ -155,42 +184,42 @@ export default {
 
 <style scoped>
 .clock {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
 .clock-face {
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .clock-circle {
-  fill: none;
-  stroke: black;
-  stroke-width: 2;
+  fill: antiquewhite;
 }
 
-.hour-hand {
-  stroke: black;
-  stroke-width: 6;
-}
-
-.minute-hand {
-  stroke: black;
-  stroke-width: 4;
-}
-
+.hour-hand,
+.minute-hand,
 .second-hand {
-  stroke: red;
-  stroke-width: 2;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .center-circle {
-  fill: black;
+  fill: #000;
 }
 
 .digital-clock {
+  display: flex;
+  flex-direction: column;
   font-size: 24px;
   margin-top: 20px;
+  color: rgb(36, 36, 36);
+  border: 3px solid #e8a87c;
+  border-radius: 15px;
+  padding: 4%;
+  background-color: #f7e5d1;
 }
 </style>

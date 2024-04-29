@@ -2,14 +2,18 @@
   <div class="todo-list max-w-md mx-auto p-4">
     <h2 class="text-2xl font-bold text-blue-700 mb-4">ToDo List</h2>
     <!-- Input pour ajouter une nouvelle tâche -->
-    <input
-      type="text"
-      v-model="newTask"
-      @keyup.enter="addTask"
-      placeholder="Ajouter une tâche..."
-      class="w-full p-2 mb-4 border rounded"
-    />
-
+    <div class="flex items-center">
+      <input
+        type="text"
+        v-model="newTask"
+        @keyup.enter="addTask"
+        placeholder="Ajouter une tâche..."
+        class="w-full p-2 mb-4 border rounded"
+      />
+      <button @click="addTask" class="px-4 py-2 bg-blue-500 ml-2 mb-4 text-white rounded">
+        +
+      </button>
+    </div>
     <!-- Liste des tâches -->
     <ul>
       <li
@@ -23,9 +27,11 @@
           v-model="task.completed"
           class="mr-2 form-checkbox text-blue-500"
         />
-        <span :class="{ 'line-through': task.completed }" class="flex-1 text-lg">{{
-          task.description
-        }}</span>
+        <span
+          :class="{ 'line-through': task.completed }"
+          class="flex-1 text-lg"
+          >{{ task.description }}</span
+        >
         <!-- Bouton pour supprimer une tâche -->
         <button
           @click="deleteTask(index)"
@@ -39,6 +45,8 @@
     <!-- Bouton pour effacer toutes les tâches complétées -->
     <button
       @click="deleteCompletedTasks"
+      :disabled="tasks <= 0"
+      :class="{ 'opacity-50 cursor-not-allowed': tasks <= 0 }"
       class="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
     >
       Effacer les tâches complétées
@@ -47,13 +55,14 @@
     <!-- Bouton pour télécharger la liste en PDF -->
     <button
       @click="downloadPDF"
+      :disabled="tasks <= 0"
+      :class="{ 'opacity-50 cursor-not-allowed': tasks <= 0 }"
       class="mt-4 px-4 py-2 bg-green-500 text-white rounded"
     >
       Télécharger la liste en PDF
     </button>
   </div>
 </template>
-
 
 <script>
 import jsPDF from "jspdf";

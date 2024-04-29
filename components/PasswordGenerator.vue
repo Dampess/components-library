@@ -1,6 +1,8 @@
 <template>
   <div class="password-generator p-4 bg-gray-100 rounded-lg shadow-md">
-    <label for="password-length" class="block mb-2">Longueur du mot de passe :</label>
+    <label for="password-length" class="block mb-2"
+      >Longueur du mot de passe :</label
+    >
     <input
       type="number"
       id="password-length"
@@ -12,21 +14,55 @@
 
     <div class="options mb-4">
       <label class="inline-flex items-center">
-        <input type="checkbox" v-model="includeNumbers" class="form-checkbox mr-2" /> Inclure des chiffres (0-9)
+        <input
+          type="checkbox"
+          v-model="includeNumbers"
+          class="form-checkbox mr-2"
+        />
+        Inclure des chiffres (0-9)
       </label>
       <label class="inline-flex items-center ml-4">
-        <input type="checkbox" v-model="includeUppercase" class="form-checkbox mr-2" /> Inclure des majuscules (A-Z)
+        <input
+          type="checkbox"
+          v-model="includeUppercase"
+          class="form-checkbox mr-2"
+        />
+        Inclure des majuscules (A-Z)
       </label>
       <label class="inline-flex items-center ml-4">
-        <input type="checkbox" v-model="includeSpecialChars" class="form-checkbox mr-2" /> Inclure des caractères spéciaux (!@#$%^&*)
+        <input
+          type="checkbox"
+          v-model="includeSpecialChars"
+          class="form-checkbox mr-2"
+        />
+        Inclure des caractères spéciaux (!@#$%^&*)
       </label>
     </div>
 
-    <button @click="generatePassword" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Générer un mot de passe</button>
+    <button
+      @click="generatePassword"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+    >
+      Générer un mot de passe
+    </button>
 
     <div v-if="password" class="generated-password mt-4">
       <label for="password" class="block mb-2">Mot de passe généré :</label>
-      <input type="text" id="password" :value="password" readonly class="border border-gray-300 rounded-md py-2 px-4 bg-gray-200" />
+      <div class="flex">
+        <input
+          type="text"
+          id="password"
+          :value="password"
+          readonly
+          class="border border-gray-300 rounded-md py-2 px-4 bg-gray-200 w-96"
+        />
+        <button
+          @click="copyPassword"
+          class="ml-2 py-2 px-4 bg-blue-500 text-white rounded-md"
+        >
+          Copier
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +93,12 @@ export default {
       }
 
       this.password = generatedPassword;
+    },
+    copyPassword() {
+      const input = document.getElementById("password");
+      input.select();
+      document.execCommand("copy");
+      // Vous pouvez ajouter un message ou une logique supplémentaire ici après la copie réussie
     },
   },
 };
